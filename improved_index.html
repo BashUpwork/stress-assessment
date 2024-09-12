@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Level Assessment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-top: 10px;
+            display: block;
+            text-align: left;
+            color: #555;
+        }
+
+        select {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stress Level Assessment</h1>
+        <form id="stressForm">
+            <label>1. I feel stressed at work:
+                <select name="question1">
+                    <option value="1">Never</option>
+                    <option value="2">Rarely</option>
+                    <option value="3">Sometimes</option>
+                    <option value="4">Often</option>
+                    <option value="5">Always</option>
+                </select>
+            </label>
+            <label>2. I find it hard to relax:
+                <select name="question2">
+                    <option value="1">Never</option>
+                    <option value="2">Rarely</option>
+                    <option value="3">Sometimes</option>
+                    <option value="4">Often</option>
+                    <option value="5">Always</option>
+                </select>
+            </label>
+            <label>3. I have trouble sleeping due to stress:
+                <select name="question3">
+                    <option value="1">Never</option>
+                    <option value="2">Rarely</option>
+                    <option value="3">Sometimes</option>
+                    <option value="4">Often</option>
+                    <option value="5">Always</option>
+                </select>
+            </label>
+            <!-- Add more questions if needed -->
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const form = document.getElementById('stressForm');
+            let totalScore = 0;
+
+            // Loop through form elements to sum the responses
+            for (let i = 0; i < form.length; i++) {
+                if (form[i].type === 'select-one') {
+                    totalScore += parseInt(form[i].value);
+                }
+            }
+
+            let resultText = '';
+            if (totalScore <= 10) {
+                resultText = 'Your stress level is LOW.';
+            } else if (totalScore <= 15) {
+                resultText = 'Your stress level is MODERATE.';
+            } else {
+                resultText = 'Your stress level is HIGH.';
+            }
+
+            document.getElementById('result').innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
